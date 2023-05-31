@@ -1,0 +1,16 @@
+<p>home works!</p>
+
+<hr />
+
+<ng-container *ngIf="appState$ | async as appState">
+  <p>Login Status: {{ appState.isLoggedIn ? "Logged In" : "Logged Out" }}</p>
+  <p>Current Theme: {{ appState.theme }}</p>
+  <p>Current Language: {{ appState.language }}</p>
+</ng-container>
+
+<button class="btn btn-primary btn-sm" (click)="toggleTheme()">
+  Toggle Theme
+</button>
+<button class="btn btn-warning btn-sm ms-3" (click)="toggleLogin()">
+  Toggle Login
+</button>

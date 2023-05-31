@@ -1,0 +1,60 @@
+<form novalidate autocomplete="off" (submit)="onSubmit()">
+  <div class="form-group mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input
+      type="text"
+      class="form-control"
+      id="username"
+      [(ngModel)]="login.username"
+      [ngModelOptions]="{ standalone: true }"
+      #username="ngModel"
+      required
+      email
+    />
+    <p
+      class="form-text text-danger"
+      *ngIf="username.touched && username.hasError('required')"
+    >
+      Required
+    </p>
+    <p
+      class="form-text text-danger"
+      *ngIf="username.touched && username.hasError('email')"
+    >
+      Improper username
+    </p>
+  </div>
+
+  <div class="form-group mb-3">
+    <label for="username" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      [(ngModel)]="login.password"
+      [ngModelOptions]="{ standalone: true }"
+      #password="ngModel"
+      required
+      minlength="8"
+    />
+    <p
+      class="form-text text-danger"
+      *ngIf="password.touched && password.hasError('required')"
+    >
+      Required
+    </p>
+    <p
+      class="form-text text-danger"
+      *ngIf="password.touched && password.hasError('minlength')"
+    >
+      Minimum 8 characters
+    </p>
+  </div>
+
+  <button
+    class="btn btn-primary btn-sm"
+    [disabled]="username.invalid || password.invalid"
+  >
+    Login
+  </button>
+</form>
