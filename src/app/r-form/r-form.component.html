@@ -26,6 +26,12 @@
     />
     <p
       class="form-text text-danger"
+      *ngIf="age.touched && age.hasError('required')"
+    >
+      Required
+    </p>
+    <p
+      class="form-text text-danger"
       *ngIf="age.touched && age.hasError('age_error')"
     >
       Only even ages are allowed

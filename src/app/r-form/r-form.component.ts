@@ -7,6 +7,7 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { Observable, delay, of } from 'rxjs';
 
 @Component({
   selector: 'app-r-form',
@@ -19,7 +20,7 @@ export class RFormComponent {
   constructor(formBuilder: FormBuilder) {
     this.form = formBuilder.group({
       fullName: ['', [Validators.required]],
-      age: [null, [this.validateAge.bind(this)]],
+      age: [null, [Validators.required], [this.validateAge.bind(this)]],
       newsletter: [false],
       language: [],
       rating: [],
@@ -51,16 +52,16 @@ export class RFormComponent {
     return this.form.controls['comments'] as FormControl;
   }
 
-  validateAge(ctrl: AbstractControl): ValidationErrors | null {
+  validateAge(ctrl: AbstractControl): Observable<ValidationErrors | null> {
     const val = +ctrl.value;
 
     if (val % 2 !== 0) {
-      return {
+      return of({
         age_error: true,
-      };
+      }).pipe(delay(500));
     }
 
-    return null;
+    return of(null).pipe(delay(500));
   }
 
   onSubmit() {
