@@ -1,0 +1,83 @@
+<form novalidate autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="from-group mb-3">
+    <label for="fullName" class="form-label">Full Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="fullName"
+      [formControl]="fullName"
+    />
+    <p
+      class="form-text text-danger"
+      *ngIf="fullName.touched && fullName.hasError('required')"
+    >
+      Required
+    </p>
+  </div>
+
+  <div class="from-group mb-3">
+    <label for="city" class="form-label">City</label>
+    <input type="text" class="form-control" id="city" [formControl]="city" />
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <button
+      class="btn btn-primary btn-sm me-2"
+      (click)="addContact()"
+      type="button"
+    >
+      Add Contact
+    </button>
+  </div>
+
+  <ng-container *ngFor="let contact of contacts; index as i">
+    <div class="row" [formGroup]="contact">
+      <div class="col-md-1 d-flex align-items-end">
+        <div class="from-group mb-3">
+          <input type="text" class="form-control" readonly [value]="i + 1" />
+        </div>
+      </div>
+      <div class="col-md-7">
+        <div class="from-group mb-6">
+          <label class="form-label">Email</label>
+          <span
+            class="form-text text-danger ms-2"
+            *ngIf="
+              contact.controls['email'].touched &&
+              contact.controls['email'].hasError('required')
+            "
+          >
+            Required
+          </span>
+          <span
+            class="form-text text-danger ms-2"
+            *ngIf="
+              contact.controls['email'].touched &&
+              contact.controls['email'].hasError('email')
+            "
+          >
+            Not a proper email
+          </span>
+          <input type="text" class="form-control" formControlName="email" />
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="from-group mb-3">
+          <label class="form-label">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="description"
+          />
+        </div>
+      </div>
+      <div class="col-md-1 pt-3 d-flex align-items-center justify-content-end">
+        <button class="btn btn-danger btn-sm" (click)="removeContact(i)">
+          Remove
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <button class="btn btn-primary btn-sm">Submit</button>
+</form>

@@ -9,6 +9,7 @@ import { TFormComponent } from './t-form/t-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RFormComponent } from './r-form/r-form.component';
+import { DFormComponent } from './d-form/d-form.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { RFormComponent } from './r-form/r-form.component';
     TFormComponent,
     LoginComponent,
     RFormComponent,
+    DFormComponent,
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule],
   providers: [],
